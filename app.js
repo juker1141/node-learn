@@ -6,6 +6,7 @@ const expressHbs = require("express-handlebars");
 
 const app = express();
 
+// handlebars template
 app.engine(
   "hbs",
   expressHbs({
@@ -17,6 +18,7 @@ app.engine(
 app.set("view engine", "hbs");
 app.set("views", "views");
 
+// pug template
 // app.set("view engine", "pug");
 // app.set("views", "views");
 
