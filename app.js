@@ -4,6 +4,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const ErrorController = require("./controllers/error");
 
+const db = require("./util/database");
+
 // const expressHbs = require("express-handlebars");
 const app = express();
 
@@ -28,6 +30,14 @@ app.set("views", "views");
 
 const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
+
+db.execute("SELECT * FROM products")
+  .then((res) => {
+    console.log(res[0], res[1]);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
