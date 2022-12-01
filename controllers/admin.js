@@ -46,15 +46,16 @@ exports.postAddProduct = (req, res, next) => {
   let priceNum = price;
   if (typeof price === "string") priceNum = parseFloat(price);
 
-  const product = new Product(null, title, imageUrl, priceNum, description);
-  product
-    .save()
-    .then((result) => {
-      res.redirect("/");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  // const product = new Product(null, title, imageUrl, priceNum, description);
+  // product
+  //   .save()
+  //   .then((result) => {
+  //     res.redirect("/");
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
+  Product.create();
 };
 
 exports.postEditProduct = (req, res, next) => {
