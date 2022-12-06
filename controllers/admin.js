@@ -49,21 +49,13 @@ exports.postAddProduct = (req, res, next) => {
   let priceNum = price;
   if (typeof price === "string") priceNum = parseFloat(price);
 
-  // const product = new Product(null, title, imageUrl, priceNum, description);
-  // product
-  //   .save()
-  //   .then((result) => {
-  //     res.redirect("/");
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   });
-  Product.create({
-    title,
-    price: priceNum,
-    imageUrl,
-    description,
-  })
+  req.user
+    .createProduct({
+      title,
+      price: priceNum,
+      imageUrl,
+      description,
+    })
     .then((result) => {
       console.log(result);
       res.redirect("/admin/products");
@@ -79,10 +71,11 @@ exports.postEditProduct = (req, res, next) => {
   let priceNum = price;
   if (typeof price === "string") priceNum = parseFloat(price);
 
-  Product.findByPk(productId)
+  req.user
+    .getProducts({ where: { id: productId } })
     .then((product) => {
       product.title = title;
-      product.price = price;
+      product.price = priceNum;
       product.description = description;
       product.imageUrl = imageUrl;
       return product.save();
@@ -113,7 +106,8 @@ exports.postDeleteProduct = (req, res, next) => {
 };
 
 exports.getProducts = (req, res, next) => {
-  Product.findAll()
+  req.user
+    .getProducts()
     .then((products) => {
       res.render("admin/products", {
         products: products,
