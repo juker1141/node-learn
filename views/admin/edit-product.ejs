@@ -58,7 +58,7 @@
         </div>
 
         <% if (editing) { %>
-        <input value="<%= product.id %>" name="productId" type="hidden" />
+        <input value="<%= product._id %>" name="productId" type="hidden" />
         <% } %>
         <button class="btn" type="submit">
           <% if (editing) { %> Update Product <% } else {%> Add Product <% } %>
