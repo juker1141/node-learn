@@ -87,21 +87,18 @@ exports.postEditProduct = (req, res, next) => {
     });
 };
 
-// exports.postDeleteProduct = (req, res, next) => {
-//   const { productId } = req.body;
+exports.postDeleteProduct = (req, res, next) => {
+  const { productId } = req.body;
 
-//   Product.findByPk(productId)
-//     .then((product) => {
-//       return product.destroy();
-//     })
-//     .then((result) => {
-//       console.log("Destroyed product!");
-//       res.redirect("/admin/products");
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// };
+  Product.deleteById(productId)
+    .then((result) => {
+      console.log("Destroyed product!");
+      res.redirect("/admin/products");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
 exports.getProducts = (req, res, next) => {
   Product.fetchAll()
