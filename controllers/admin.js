@@ -49,7 +49,14 @@ exports.postAddProduct = (req, res, next) => {
   let priceNum = price;
   if (typeof price === "string") priceNum = parseFloat(price);
 
-  const product = new Product(title, priceNum, description, imageUrl);
+  const product = new Product(
+    title,
+    priceNum,
+    description,
+    imageUrl,
+    null,
+    req.user._id
+  );
 
   product
     .save()
